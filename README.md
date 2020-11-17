@@ -1,4 +1,4 @@
-# todo-list
+# Todo List
 Todo list built using vanilla JavaScript from The Odin Project curriculum.
 
 Live Demo: https://sultanbadri.github.io/todo-list/
