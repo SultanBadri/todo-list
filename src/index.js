@@ -34,6 +34,37 @@ function renderAndSave() {
   localStorage.setItem("task.selectedListId", selectedListId);
 }
 
+//clear lists
+function clearElement(element) {
+  while (element.firstChild) {
+    element.removeChild(element.firstChild);
+  }
+}
+
+function renderTaskCount(selectedList) {
+  const incompleteTaskCount = selectedList.tasks.filter(
+    (task) => !task.complete
+  ).length;
+  const taskString = incompleteTaskCount === 1 ? "task" : "tasks";
+  listCountElement.innerText = `${incompleteTaskCount} ${taskString} remaining`;
+}
+
+function colorTasks(selectedList) {
+  const todos = [...document.querySelectorAll(".todo")];
+  const checkbox = [...document.querySelectorAll(".checkbox")];
+  for (let i = 0; i < todos.length; i++) {
+    for (let i = 0; i < selectedList.tasks.length; i++) {
+      if (selectedList.tasks[i].priority === "High") {
+        checkbox[i].style.border = "2px solid #ed1250";
+      } else if (selectedList.tasks[i].priority === "Medium") {
+        checkbox[i].style.border = "2px solid #d3d00f";
+      } else {
+        checkbox[i].style.border = "2px solid #0fc53d";
+      }
+    }
+  }
+}
+
 function render() {
   clearElement(listsContainer);
   renderLists();
@@ -48,13 +79,6 @@ function render() {
     clearElement(tasksContainer);
     renderTasks(selectedList);
     colorTasks(selectedList);
-  }
-}
-
-//clear lists
-function clearElement(element) {
-  while (element.firstChild) {
-    element.removeChild(element.firstChild);
   }
 }
 
@@ -77,30 +101,6 @@ function renderTasks(selectedList) {
     listDisplayContainer.style.backgroundSize = "35%";
   } else {
     listDisplayContainer.style.background = "";
-  }
-
-  function renderTaskCount(selectedList) {
-    const incompleteTaskCount = selectedList.tasks.filter(
-      (task) => !task.complete
-    ).length;
-    const taskString = incompleteTaskCount === 1 ? "task" : "tasks";
-    listCountElement.innerText = `${incompleteTaskCount} ${taskString} remaining`;
-  }
-
-  function colorTasks(selectedList) {
-    const todos = [...document.querySelectorAll(".todo")];
-    const checkbox = [...document.querySelectorAll(".checkbox")];
-    for (let i = 0; i < todos.length; i++) {
-      for (let i = 0; i < selectedList.tasks.length; i++) {
-        if (selectedList.tasks[i].priority === "High") {
-          checkbox[i].style.border = "2px solid #ed1250";
-        } else if (selectedList.tasks[i].priority === "Medium") {
-          checkbox[i].style.border = "2px solid #d3d00f";
-        } else {
-          checkbox[i].style.border = "2px solid #0fc53d";
-        }
-      }
-    }
   }
 
   selectedList.tasks.forEach((task) => {
@@ -265,7 +265,9 @@ tasksContainer.addEventListener("click", (e) => {
 
 //open form when user clicks on + button
 addButton.addEventListener("click", () => {
+  newTaskForm.reset();
   openOrCloseAddTaskForm();
+
   if (modalOpen) {
     addButton.style.background = "#2185d5";
     addButton.style.transform = "rotate(45deg)";
@@ -308,7 +310,6 @@ export {
   renderLists,
   listDisplayContainer,
   listTitleElement,
-  renderTaskCount,
   tasksContainer,
   taskTemplate,
   editTask,

@@ -6,7 +6,6 @@ import {
   renderLists,
   listDisplayContainer,
   listTitleElement,
-  renderTaskCount,
   tasksContainer,
   taskTemplate,
   editTask,
@@ -40,7 +39,6 @@ const searchTasks = (() => {
     } else {
       listDisplayContainer.style.display = "";
       listTitleElement.innerHTML = `<i class="fas fa-tasks"></i> ${selectedList.name}`;
-      renderTaskCount(selectedList);
       clearElement(tasksContainer);
       renderSearchedTasks(searchedTasks);
       colorSearchedTasks(searchedTasks);
