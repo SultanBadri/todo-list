@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="stylesheet.css" />
+    <script
+      src="https://use.fontawesome.com/releases/v5.15.1/js/all.js"
+      data-auto-a11y="true"
+    ></script>
+    <script src="main.js" defer></script>
+    <title>Todo List</title>
+  </head>
+  <body>
+    <div id="menu">
+      <div class="hamburger">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </div>
+      <div class="search-box">
+        <table>
+          <tr>
+            <td>
+              <input
+                type="text"
+                placeholder="Search"
+                name="searchBar"
+                id="searchBar"
+              />
+            </td>
+            <td>
+              <a class="search-icon"><i class="fas fa-search"></i></a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <section id="main">
+      <div id="sidebar">
+        <h2>My Todo List</h2>
+        <div class="task-list">
+          <h3><i class="far fa-folder-open"></i> My Tasks</h3>
+          <ul data-lists></ul>
+          <form data-new-list-form>
+            <input
+              type="text"
+              class="new-list"
+              data-new-list-input
+              placeholder="Add a new list"
+              aria-label="Add a new list"
+            />
+            <i class="fas fa-arrow-up" id="up-arrow"></i>
+          </form>
+          <button class="delete-btn" id="delete-btn" data-delete-list-button>
+            Delete <i class="far fa-trash-alt"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="todos" data-list-display-container>
+        <div class="todo-lister">
+          <div class="todo-header">
+            <h2 data-list-title></h2>
+            <p data-list-count><span></span></p>
+          </div>
+          <div class="todo-list" data-tasks></div>
+          <div class="below-todo">
+            <div class="btns">
+              <button class="add-btn">
+                <i class="fas fa-plus"></i>
+              </button>
+              <button
+                class="clear-btn"
+                id="clear-btn"
+                data-clear-complete-tasks-button
+              >
+                Clear completed tasks <i class="far fa-times-circle"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="modal">
+      <div class="container">
+        <h2>New Task</h2>
+        <div class="close">+</div>
+        <form data-new-task-form>
+          <label for="name">Task name:</label><br />
+          <input
+            type="text"
+            id="name"
+            data-new-task-input
+            placeholder="Task name"
+            ariel-label="Add new task item"
+            autocomplete="off"
+            required
+          /><br />
+          <label for="due-date">Due date:</label>
+          <input type="date" id="due-date" name="due-date" /><br />
+          <label for="priority">Priority:</label><br />
+          <select name="priority" id="priority">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option></select
+          ><br />
+          <label for="description">Description:</label><br />
+          <textarea
+            name="description"
+            id="description"
+            cols="30"
+            rows="6"
+          ></textarea
+          ><br />
+          <input type="submit" />
+        </form>
+      </div>
+    </div>
+
+    <div id="overlay"></div>
+
+    <template id="task-template">
+      <div class="todo">
+        <div class="todo-content">
+          <div class="task">
+            <input type="checkbox" />
+            <label><span class="checkbox"></span></label>
+          </div>
+        </div>
+      </div>
+    </template>
+  </body>
+</html>
